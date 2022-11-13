@@ -1,4 +1,4 @@
-package vn.fs.repository;
+package com.example.demo.repository;
 
 import java.util.List;
 
@@ -7,12 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import vn.fs.entities.Product;
-
-/**
- * @author DongTHD
- *
- */
+import com.example.demo.entities.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

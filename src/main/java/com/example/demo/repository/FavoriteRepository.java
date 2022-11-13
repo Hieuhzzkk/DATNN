@@ -1,4 +1,4 @@
-package vn.fs.repository;
+package com.example.demo.repository;
 
 import java.util.List;
 
@@ -6,12 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import vn.fs.entities.Favorite;
-
-/**
- * @author DongTHD
- *
- */
+import com.example.demo.entities.Favorite;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 

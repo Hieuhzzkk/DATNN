@@ -8,11 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.OrderDetail;
 
-
-/**
- * @author DongTHD
- *
- */
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
 

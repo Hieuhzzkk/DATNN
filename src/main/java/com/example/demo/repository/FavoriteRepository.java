@@ -7,12 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.Favorite;
-
-
-/**
- * @author DongTHD
- *
- */
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 

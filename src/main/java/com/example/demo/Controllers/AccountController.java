@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dto.ChangePassword;
 import com.example.demo.entities.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.SendMailService;
+
+
 
 
 @Controller
@@ -68,11 +71,43 @@ public class AccountController {
 			model.addAttribute("email", email);
 			model.addAttribute("newPassword", "");
 			model.addAttribute("confirmPassword", "");
-			//model.addAttribute("changePassword", new ChangePassword());
+			model.addAttribute("changePassword", new ChangePassword());
 			return new ModelAndView("web/changePassword", model);
 		}
 		model.addAttribute("error", "Mã xác thực OTP không đúng, thử lại!");
 		return new ModelAndView("web/confirmOtpForgotPassword", model);
 	}
+	
+	
+	@PostMapping("/changePassword")
+	public ModelAndView changeForm(ModelMap model,
+			@Valid @ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result,
+			@RequestParam("email") String email, @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+		if (result.hasErrors()) {
+
+			model.addAttribute("newPassword", newPassword);
+			model.addAttribute("newPassword", confirmPassword);
+			model.addAttribute("email", email);
+			return new ModelAndView("/web/changePassword", model);
+		}
+
+		if (!changePassword.getNewPassword().equals(changePassword.getConfirmPassword())) {
+
+			model.addAttribute("newPassword", newPassword);
+			model.addAttribute("newPassword", confirmPassword);
+			model.addAttribute("error", "error");
+			model.addAttribute("email", email);
+			return new ModelAndView("/web/changePassword", model);
+		}
+		User user = userRepository.findByEmail(email);
+		user.setStatus(true);
+		user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+		userRepository.save(user);
+		model.addAttribute("message", "Đặt lại mật khẩu thành công!");
+		model.addAttribute("email", "");
+		session.removeAttribute("otp");
+		return new ModelAndView("/web/changePassword", model);
+	}
+	
 
 }

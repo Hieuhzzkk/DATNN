@@ -62,6 +62,17 @@ public class AccountController {
 		model.addAttribute("error", "Email này chưa đăng ký!");
 		return new ModelAndView("web/forgotPassword", model);
 	}
-	
+	@PostMapping("/confirmOtpForgotPassword")
+	public ModelAndView confirm(ModelMap model, @RequestParam("otp") String otp, @RequestParam("email") String email) {
+		if (otp.equals(String.valueOf(session.getAttribute("otp")))) {
+			model.addAttribute("email", email);
+			model.addAttribute("newPassword", "");
+			model.addAttribute("confirmPassword", "");
+			//model.addAttribute("changePassword", new ChangePassword());
+			return new ModelAndView("web/changePassword", model);
+		}
+		model.addAttribute("error", "Mã xác thực OTP không đúng, thử lại!");
+		return new ModelAndView("web/confirmOtpForgotPassword", model);
+	}
 
 }

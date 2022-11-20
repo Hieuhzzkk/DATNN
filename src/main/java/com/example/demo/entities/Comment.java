@@ -50,4 +50,60 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "orderDetailId")
 	private OrderDetail orderDetail;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getRateDate() {
+		return rateDate;
+	}
+
+	public void setRateDate(Date rateDate) {
+		this.rateDate = rateDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
 }

@@ -90,7 +90,7 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form th:action="@{/admin/save-product}" th:object="${product}" method="post" enctype="multipart/form-data">
+												<form th:action="@{/admin/addProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
 													<div class="row">
 														<div class="col-sm-12">
 															<div class="form-group form-group-default">
@@ -138,8 +138,8 @@
 														</div>
 														<div class="col-sm-12">
 															<div class="form-group form-group-default">
-																<label for="productImage">Images</label>
-																<input type="file" id="productImage" name="productImage" class="input-file">
+																<label>Images</label>
+																<input type="file" id="productImage" name="file" class="form-control">
 															</div>
 														</div>
 														<div class="col-sm-12">

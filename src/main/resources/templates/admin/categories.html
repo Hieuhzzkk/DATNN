@@ -110,9 +110,15 @@
 									</div>
 								</div>
 
-								<div class="alert alert-success row col-12"
-									th:if="${message}" th:text="${message}">
+								<div th:if="${success}" class=" text-center alert alert-primary">
+								<p th:text="${success}"></p>
 								</div>
+								
+
+								<div th:if="${error}" class="text-center alert alert-danger">
+								<p th:text="${error}"></p>
+								</div>
+								
 								<div class="table-responsive">
 									<table id="add-row" class="display table table-striped table-hover" >
 										<thead>

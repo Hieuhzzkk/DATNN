@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entities.Category;
 import com.example.demo.entities.User;
@@ -63,16 +64,15 @@ public class CategoryController {
 	// add category
 	@PostMapping(value = "/addCategory")
 	public String addCategory(@Validated @ModelAttribute("category") Category category, ModelMap model,
-			BindingResult bindingResult) {
+			BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("error", "failure");
-
-			return "admin/categories";
+		try {
+			categoryRepository.save(category);
+			redirectAttributes.addFlashAttribute("success", "SUCCESS");
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "ERROR");
 		}
-
-		categoryRepository.save(category);
-		model.addAttribute("message", "successful!");
 
 		return "redirect:/admin/categories";
 	}
@@ -89,10 +89,10 @@ public class CategoryController {
 
 	// delete category
 	@GetMapping("/delete/{id}")
-	public String delCategory(@PathVariable("id") Long id, Model model) {
+	public String delCategory(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		categoryRepository.deleteById(id);
 
-		model.addAttribute("message", "Delete successful!");
+		redirectAttributes.addFlashAttribute("success", "DELETE SUCCESS");
 
 		return "redirect:/admin/categories";
 	}

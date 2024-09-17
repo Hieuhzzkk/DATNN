@@ -63,29 +63,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
     		+ "GROUP BY month(od.order_date);", nativeQuery = true)
     public List<Object[]> repoWhereMonth();
     
-    // Statistics of products sold by quarter
-    @Query(value = "Select QUARTER(od.order_date),\r\n"
-    		+ "SUM(o.quantity) as quantity ,\r\n"
-    		+ "SUM(o.quantity * o.price) as sum,\r\n"
-    		+ "AVG(o.price) as avg,\r\n"
-    		+ "Min(o.price) as min,\r\n"
-    		+ "max(o.price) as max\r\n"
-    		+ "FROM order_details o\r\n"
-    		+ "INNER JOIN orders od ON o.order_id = od.order_id\r\n"
-    		+ "GROUP By QUARTER(od.order_date);", nativeQuery = true)
-    public List<Object[]> repoWhereQUARTER();
-    
-    // Statistics by user
-    @Query(value = "SELECT c.user_id,\r\n"
-    		+ "SUM(o.quantity) as quantity,\r\n"
-    		+ "SUM(o.quantity * o.price) as sum,\r\n"
-    		+ "AVG(o.price) as avg,\r\n"
-    		+ "Min(o.price) as min,\r\n"
-    		+ "max(o.price) as max\r\n"
-    		+ "FROM order_details o\r\n"
-    		+ "INNER JOIN orders p ON o.order_id = p.order_id\r\n"
-    		+ "INNER JOIN user c ON p.user_id = c.user_id\r\n"
-    		+ "GROUP BY c.user_id;", nativeQuery = true)
-    public List<Object[]> reportCustommer();
+
 
 }
